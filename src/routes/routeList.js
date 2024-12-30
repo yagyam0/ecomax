@@ -1,6 +1,6 @@
 import Home from "../pages/Home";
 import About from "../pages/About";
-import Collections from "../pages/Collection";
+import Collections from "../pages/Collections";
 import Order from "../pages/Order";
 import placeOrder from "../pages/Order/placeOrder";
 import Login from "../pages/Login";
