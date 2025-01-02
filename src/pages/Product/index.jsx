@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 import { assets } from '../../assets/assets';
 import LatestCollection from '../../components/LatestCollection';
+import toast from 'react-hot-toast';
 
 const Product = () => {
   const { productId } = useParams();
@@ -30,8 +31,9 @@ const Product = () => {
   }
 
   const handleCart = async () => {
-    if(!selectedSize) return;
+    if (!selectedSize) return;
     handleAddToCart(productData, selectedSize);
+    toast.success('Product Added to cart successfully !');
     setSelectedSize(null);
   }
 
@@ -97,12 +99,13 @@ const Product = () => {
           </div>
           <div className='flex gap-4'>
             <button
-              className="px-5 py-3 mt-4 text-white bg-black rounded-md hover:bg-gray-800 focus:outline-none"
+              onClick={handleCart}
+              className="px-5 py-3 mt-4 text-white bg-gray-800 rounded-md hover:bg-black focus:outline-none"
             >
               Buy Now
             </button>
             <button
-              className="px-5 py-3 mt-4 text-black bg-yellow-500 rounded-md hover:bg-yellow-400 focus:outline-none"
+              className="px-5 py-3 mt-4 text-black bg-yellow-400 rounded-md hover:bg-yellow-500 focus:outline-none"
               onClick={handleCart}
             >
               Add to Cart

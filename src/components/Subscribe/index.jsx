@@ -11,9 +11,8 @@ const Subscribe = () => {
     }
 
     const handleSubscription = () => {
-        console.log(email);
         setEmail('');
-        toast.success('Subscribe to Newsletter');
+        toast.success('Subscribed to Newsletter Successfully!');
     }
 
     return (

@@ -80,7 +80,7 @@ const Collections = () => {
   return (
     <>
       {/* Filter Toggle (Mobile View) */}
-      <div className="flex items-center px-3 gap-3 mb-4 sm:hidden">
+      <div className="flex items-center gap-3 mb-2 sm:hidden">
         <p className="uppercase mb-0 text-lg font-semibold text-gray-700">Filters</p>
         <img
           onClick={toggleFilters}
@@ -152,7 +152,7 @@ const Collections = () => {
                 return (
                   <Link
                     key={_id}
-                    to={`/product/${_id}`}
+                    to={`/Product/${_id}`}
                     className="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     <img

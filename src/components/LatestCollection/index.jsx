@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 const LatestCollection = ({ primaryText, secondaryText, productsToShow, filterBy }) => {
     const { products, currency } = useContext(ShopContext);
-    console.log("🚀 ~ LatestCollection ~ products:", products)
 
     const filteredProducts = filterBy
         ? products.filter(filterBy)
@@ -32,7 +31,7 @@ const LatestCollection = ({ primaryText, secondaryText, productsToShow, filterBy
                     return (
                         <Link
                             key={_id}
-                            to={`/product/${_id}`}
+                            to={`/Product/${_id}`}
                             className="flex flex-col items-center bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-all duration-300 hover:scale-105"
                         >
                             <img

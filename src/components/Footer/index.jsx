@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -18,9 +19,9 @@ const Footer = () => {
                     <p className="uppercase text-lg font-semibold text-gray-800 tracking-wide">Company</p>
                     <ul className="space-y-2">
                         {["Home", "Collections", "About", "Contact"].map((item) => (
-                            <li key={item} className="text-sm text-gray-600 hover:text-yellow-400 cursor-pointer transition-colors duration-300">
+                            <Link key={item} to={item === 'Home' ? '/' : `/${item}`} className="block text-sm text-gray-600 hover:text-yellow-400 cursor-pointer transition-colors duration-300">
                                 {item}
-                            </li>
+                            </Link>
                         ))}
                     </ul>
                 </div>

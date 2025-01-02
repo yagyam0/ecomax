@@ -50,14 +50,14 @@ const Header = () => {
             {/* Desktop Navigation */}
             <ul className="hidden sm:flex gap-6 text-[15px] text-gray-700">
                 <NavItem to="/" label="Home" />
-                <NavItem to="/collections" label="Collections" />
-                <NavItem to="/about" label="About" />
-                <NavItem to="/contact" label="Contact" />
+                <NavItem to="/Collections" label="Collections" />
+                <NavItem to="/About" label="About" />
+                <NavItem to="/Contact" label="Contact" />
             </ul>
 
             {/* Icons and Sidebar Toggle */}
             <div className="flex items-center gap-6">
-                <img src={assets.search_icon} alt="Search" onClick={!showSearch ? handleVisibility : () => {}} className="w-6 cursor-pointer" />
+                <img src={assets.search_icon} alt="Search" onClick={!showSearch ? handleVisibility : () => { }} className="w-6 cursor-pointer" />
                 <div className="relative group">
                     <img
                         src={assets.profile_icon}
@@ -93,19 +93,47 @@ const Header = () => {
             </div>
 
             {/* Sidebar */}
-            <div className={`absolute top-0 right-0 bottom-0 bg-white transition-transform transform ${isSidebarOpen ? "translate-x-0 w-full" : "translate-x-full w-0 hidden"}`}>
-                <div className="flex flex-col text-gray-600">
-                    <div
+            <div
+                className={`absolute z-50 top-0 right-0 bottom-0 bg-white shadow-md transition-transform transform ${isSidebarOpen ? "translate-x-0 w-full md:w-1/3" : "translate-x-full w-0 hidden"
+                    }`}
+            >
+                <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                    <h2 className="text-lg font-semibold text-gray-700">Menu</h2>
+                    <button
                         onClick={toggleSidebar}
-                        className="flex items-center cursor-pointer gap-4 p-3"
+                        className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition"
                     >
-                        <img src={assets.dropdown_icon} alt="Close" className="h-4 rotate-180" />
-                        <p className="text-md">Back</p>
-                    </div>
-                    <SidebarItem to="/" label="Home" />
-                    <SidebarItem to="/collections" label="Collections" />
-                    <SidebarItem to="/about" label="About" />
-                    <SidebarItem to="/contact" label="Contact" />
+                        <img
+                            src={assets.dropdown_icon}
+                            alt="Close"
+                            className="h-5 transform rotate-180"
+                        />
+                        <span className="text-sm font-medium">Close</span>
+                    </button>
+                </div>
+
+                {/* Sidebar Items */}
+                <div className="flex flex-col text-gray-600 divide-y divide-gray-100">
+                    <SidebarItem
+                        to="/"
+                        label="Home"
+                        className="p-4 hover:bg-gray-50 hover:text-gray-800 transition"
+                    />
+                    <SidebarItem
+                        to="/collections"
+                        label="Collections"
+                        className="p-4 hover:bg-gray-50 hover:text-gray-800 transition"
+                    />
+                    <SidebarItem
+                        to="/about"
+                        label="About"
+                        className="p-4 hover:bg-gray-50 hover:text-gray-800 transition"
+                    />
+                    <SidebarItem
+                        to="/contact"
+                        label="Contact"
+                        className="p-4 hover:bg-gray-50 hover:text-gray-800 transition"
+                    />
                 </div>
             </div>
         </header>

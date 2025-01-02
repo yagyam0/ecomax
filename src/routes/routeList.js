@@ -10,15 +10,15 @@ import Cart from "../pages/Cart";
 
 const ROUTE_PATHS = {
     HOME: '/',
-    CONTACT: '/contact',
-    ABOUT: '/about',
-    ORDERS: '/orders',
-    PRODUCT: '/product/:productId',
-    PLACEORDER: '/order-summary',
-    COLLECTIONS: '/collections',
-    CART: '/cart',
-    LOGIN: '/login',
-    SIGNUP: '/signup',
+    CONTACT: '/Contact',
+    ABOUT: '/About',
+    ORDERS: '/Orders',
+    PRODUCT: '/Product/:productId',
+    PLACEORDER: '/Order-Summary',
+    COLLECTIONS: '/Collections',
+    CART: '/Cart',
+    LOGIN: '/Login',
+    SIGNUP: '/Signup',
 }
 
 export const routeList = [

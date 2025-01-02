@@ -5,7 +5,7 @@ const Hero = () => {
     return (
         <div className="flex flex-col sm:flex-row items-center border-[1px] border-b-yellow-300 bg-yellow-50">
             {/* Hero Left Side */}
-            <div className="w-full sm:w-1/2 flex flex-col items-center justify-center py-10 sm:py-16 px-6 sm:px-12 text-center">
+            <div className="w-full sm:w-1/2 flex flex-col items-center justify-center py-8 sm:py-16 px-6 sm:px-12 text-center">
                 <div className="text-gray-800 space-y-4">
                     <div className="flex items-center gap-2">
                         <div className="w-10 md:w-12 h-[2px] bg-gray-800"></div>

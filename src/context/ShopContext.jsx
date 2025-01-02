@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { createContext, useLayoutEffect, useRef, useState } from 'react'
+import React, { createContext, useLayoutEffect, useRef, useState } from 'react';
 import { products } from '../assets/assets';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 
 const ShopContext = createContext();
 
 const ShopContextProvider = ({ children }) => {
-
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const [showSearch, setShowSearch] = useState(false);
@@ -24,6 +22,7 @@ const ShopContextProvider = ({ children }) => {
         }
     }, [pathname]);
 
+
     const handleVisibility = () => {
         const isCurrentlyVisible = showSearch;
         if (!isCurrentlyVisible) {
@@ -34,13 +33,41 @@ const ShopContextProvider = ({ children }) => {
         if (search) setSearch('');
     };
 
-    const handleAddToCart = (item, sizePrefrence) => {
-        setCartItems((prevItems) => ([
-            ...prevItems,  
-            { ...item, sizePrefrence }
-        ]));
-        // navigate('/cart');
-    }
+    const handleAddToCart = (item, size) => {
+        setCartItems((prevItems) => {
+            const existingProduct = prevItems.find(
+                (product) => product._id === item._id && product.sizePrefrence === size
+            );
+
+            if (existingProduct) {
+                return prevItems.map((product) =>
+                    product._id === item._id
+                        ? { ...product, quantity: product.quantity + 1 }
+                        : product
+                );
+            }
+            return [
+                ...prevItems,
+                {
+                    ...item,
+                    quantity: 1,
+                    sizePrefrence: size,
+                },
+            ];
+        });
+    };
+
+    const handleRemoveCartItems = (id, removeEntireItem = false) => {
+        setCartItems((prevItems) =>
+            removeEntireItem
+                ? prevItems.filter((product) => product._id !== id)
+                : prevItems.map((product) =>
+                    product._id === id
+                        ? { ...product, quantity: product.quantity - 1 }
+                        : product
+                )
+        );
+    };
 
     const value = {
         products,
@@ -52,13 +79,14 @@ const ShopContextProvider = ({ children }) => {
         handleVisibility,
         cartItems,
         handleAddToCart,
-    }
+        handleRemoveCartItems,
+    };
 
     return (
         <ShopContext.Provider value={value}>
             {children}
         </ShopContext.Provider>
-    )
-}
+    );
+};
 
 export { ShopContextProvider, ShopContext };

@@ -3,6 +3,7 @@ import CustomRoutes from './routes/CustomRoutes';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchBar from './components/Search/SearchBar';
+import Toast from './components/Toaster';
 
 const App = () => {
   
@@ -12,6 +13,7 @@ const App = () => {
       <SearchBar />
       <CustomRoutes />
       <Footer />
+      <Toast />
     </div>
   )
 }
