@@ -1,17 +1,19 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { assets } from "../../assets/assets";
+import { ShopContext } from "../../context/ShopContext";
 
 const Header = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { pathname } = useLocation();
+    const { showSearch, handleVisibility } = useContext(ShopContext);
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev)
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (isSidebarOpen) {
             setIsSidebarOpen(false);
         }
@@ -55,7 +57,7 @@ const Header = () => {
 
             {/* Icons and Sidebar Toggle */}
             <div className="flex items-center gap-6">
-                <img src={assets.search_icon} alt="Search" className="w-6 cursor-pointer" />
+                <img src={assets.search_icon} alt="Search" onClick={!showSearch ? handleVisibility : () => {}} className="w-6 cursor-pointer" />
                 <div className="relative group">
                     <img
                         src={assets.profile_icon}
@@ -63,7 +65,7 @@ const Header = () => {
                         className="w-6 h-6 cursor-pointer transition-all duration-300"
                     />
                     <div className="hidden group-hover:block absolute right-0 pt-2">
-                        <div className="flex flex-col gap-1 w-40 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200 transition-all duration-300">
+                        <div className="flex relative z-10 flex-col gap-1 w-40 bg-white text-gray-800 rounded-lg shadow-lg border border-gray-200 transition-all duration-300">
                             {["My Profile", "Orders", "Logout"].map((item) => (
                                 <p
                                     key={item}
