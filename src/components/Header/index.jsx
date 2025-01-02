@@ -7,7 +7,7 @@ import { ShopContext } from "../../context/ShopContext";
 const Header = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { pathname } = useLocation();
-    const { showSearch, handleVisibility } = useContext(ShopContext);
+    const { showSearch, cartItems, handleVisibility } = useContext(ShopContext);
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev)
@@ -80,8 +80,8 @@ const Header = () => {
 
                 <Link to="/cart" className="relative">
                     <img src={assets.cart_icon} alt="Cart" className="w-5" />
-                    <p className="absolute -bottom-1 -right-1 w-4 h-4 text-center text-[9px] bg-black text-white rounded-full">
-                        10
+                    <p className={`absolute transition-all ease-out -bottom-1 -right-1 pt-[2px] w-4 h-4 text-center text-[9px] rounded-full ${cartItems.length ? 'text-black bg-yellow-500' : 'bg-black text-white'}`}>
+                        {cartItems.length}
                     </p>
                 </Link>
                 <img

@@ -13,16 +13,7 @@ const ShopContextProvider = ({ children }) => {
     const [showSearch, setShowSearch] = useState(false);
     const [search, setSearch] = useState('');
     const wasSearchOpen = useRef(false);
-
-    const handleVisibility = () => {
-        const isCurrentlyVisible = showSearch;
-        if (!isCurrentlyVisible) {
-            navigate('/collections');
-        }
-        wasSearchOpen.current = !isCurrentlyVisible;
-        setShowSearch(!isCurrentlyVisible);
-        if(search) setSearch('');
-    };
+    const [cartItems, setCartItems] = useState([]);
 
     useLayoutEffect(() => {
         const isCollectionsPage = pathname === '/collections';
@@ -33,6 +24,24 @@ const ShopContextProvider = ({ children }) => {
         }
     }, [pathname]);
 
+    const handleVisibility = () => {
+        const isCurrentlyVisible = showSearch;
+        if (!isCurrentlyVisible) {
+            navigate('/collections');
+        }
+        wasSearchOpen.current = !isCurrentlyVisible;
+        setShowSearch(!isCurrentlyVisible);
+        if (search) setSearch('');
+    };
+
+    const handleAddToCart = (item, sizePrefrence) => {
+        setCartItems((prevItems) => ([
+            ...prevItems,  
+            { ...item, sizePrefrence }
+        ]));
+        // navigate('/cart');
+    }
+
     const value = {
         products,
         currency: '$',
@@ -41,6 +50,8 @@ const ShopContextProvider = ({ children }) => {
         setSearch,
         showSearch,
         handleVisibility,
+        cartItems,
+        handleAddToCart,
     }
 
     return (
