@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import ProductTable from '../../components/ProductTable';
-import { assets } from '../../assets/assets';
+import { assets, features } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
+import Highlights from '../../components/Highlights';
+import Subscribe from '../../components/Subscribe';
 
 const Cart = () => {
   const { cartItems, handleRemoveCartItems, handleAddToCart } = useContext(ShopContext);
@@ -16,7 +18,7 @@ const Cart = () => {
         (acc, curr) => acc + curr.price * curr.quantity,
         0
       );
-      setTotalDiscount(((total*15)/100).toFixed(2));
+      setTotalDiscount(((total * 15) / 100).toFixed(2));
       setTotalPrice(total);
     };
 
@@ -44,7 +46,7 @@ const Cart = () => {
       {cartItems.length ? (
         <div className="grid grid-cols-1 xl:grid-cols-[3fr_1fr] gap-6">
           {/* Product Table */}
-          <div className="bg-white shadow-lg rounded-lg p-6">
+          <div className="bg-white overflow-auto shadow-lg rounded-lg p-6">
             <ProductTable
               products={cartItems}
               handleAddToCart={handleAddToCart}
@@ -53,7 +55,7 @@ const Cart = () => {
           </div>
 
           {/* Payment Summary */}
-          <aside className="bg-white shadow-lg rounded-lg p-6">
+          <aside className="bg-white max-h-[300px] shadow-lg rounded-lg p-6">
             <h3 className="text-lg font-bold text-gray-800 mb-4 text-center border-b pb-2">
               Cart Summary
             </h3>
@@ -75,7 +77,7 @@ const Cart = () => {
           </aside>
         </div>
       ) : (
-        <div className="flex flex-col items-center py-2 justify-center gap-6 bg-gray-50">
+        <div className="flex flex-col items-center py-5 justify-center gap-6 bg-gray-50">
           <img
             src={assets.cartIcon}
             className="w-[100px] md:w-[150px] mb-2 opacity-50 hover:opacity-100 transition duration-300"
@@ -92,6 +94,18 @@ const Cart = () => {
           </button>
         </div>
       )}
+
+      {/* Features Section */}
+      <hr className='m-5' />
+      <Subscribe />
+
+      <section className="py-8 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center justify-around sm:flex-row gap-8">
+          {features?.map((item) => (
+            <Highlights key={item.id} {...item} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

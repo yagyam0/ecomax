@@ -34,6 +34,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
+      <Subscribe />
       <section className="py-8 bg-slate-50">
         <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center justify-around sm:flex-row gap-8">
           {features?.map((item) => (
@@ -41,8 +42,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
-      <Subscribe />
     </div>
   );
 };

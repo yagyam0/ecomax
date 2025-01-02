@@ -2,6 +2,7 @@
 import React from "react";
 
 const ProductTable = ({ products, handleAddToCart, handleRemoveCartItems }) => {
+    console.log("🚀 ~ ProductTable ~ products:", products)
     const tableHeaders = ["Product", "Price", "Quantity", "Total", "Actions"];
 
     const handleIncreaseQuantity = (product) => {
@@ -10,16 +11,16 @@ const ProductTable = ({ products, handleAddToCart, handleRemoveCartItems }) => {
 
     const handleDecreaseQuantity = (product) => {
         if (product.quantity > 1) {
-            handleRemoveCartItems(product._id, false); 
+            handleRemoveCartItems(product._id, product.sizePrefrence, false); 
         } else {
-            handleRemoveCartItems(product._id, true); 
+            handleRemoveCartItems(product._id, product.sizePrefrence, true); 
         }
     };
 
     return (
-        <div className="overflow-auto">
+        <div className="relative overflow-auto max-h-[800px]">
             <table className="w-full border-collapse bg-white rounded-lg shadow-lg">
-                <thead>
+                <thead className="sticky top-0">
                     <tr className="bg-gray-100 text-center text-gray-800">
                         {tableHeaders.map((header, index) => (
                             <th key={index} className="py-3 px-4 text-sm font-semibold">
@@ -40,6 +41,10 @@ const ProductTable = ({ products, handleAddToCart, handleRemoveCartItems }) => {
                                 <div>
                                     <h3 className="font-medium text-gray-800">{product.name}</h3>
                                     <p className="text-sm text-gray-500">{product.category}</p>
+                                    <p className="text-sm mt-2 text-gray-500">
+                                        <span className="font-medium text-gray-800">Size: </span>
+                                        <span className="font-medium text-gray-800">{product.sizePrefrence}</span>
+                                    </p>
                                 </div>
                             </td>
                             <td className="py-4 px-4 text-gray-700 font-medium">
@@ -69,7 +74,7 @@ const ProductTable = ({ products, handleAddToCart, handleRemoveCartItems }) => {
                             </td>
                             <td className="py-4 text-center px-4">
                                 <button
-                                    onClick={() => handleRemoveCartItems(product._id, true)}
+                                    onClick={() => handleRemoveCartItems(product._id, product.sizePrefrence, true)}
                                     className="text-red-500 hover:underline"
                                 >
                                     Remove

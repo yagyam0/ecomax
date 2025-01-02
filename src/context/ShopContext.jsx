@@ -12,6 +12,7 @@ const ShopContextProvider = ({ children }) => {
     const [search, setSearch] = useState('');
     const wasSearchOpen = useRef(false);
     const [cartItems, setCartItems] = useState([]);
+    console.log("🚀 ~ ShopContextProvider ~ cartItems:", cartItems)
 
     useLayoutEffect(() => {
         const isCollectionsPage = pathname === '/collections';
@@ -57,15 +58,17 @@ const ShopContextProvider = ({ children }) => {
         });
     };
 
-    const handleRemoveCartItems = (id, removeEntireItem = false) => {
+    const handleRemoveCartItems = (id, size, removeEntireItem = false) => {
         setCartItems((prevItems) =>
-            removeEntireItem
-                ? prevItems.filter((product) => product._id !== id)
-                : prevItems.map((product) =>
-                    product._id === id
-                        ? { ...product, quantity: product.quantity - 1 }
-                        : product
-                )
+            prevItems
+                .map((product) => {
+                    if (product._id !== id || product.sizePrefrence !== size) return product;
+                    if (removeEntireItem || product.quantity === 1) {
+                        return null;
+                    }
+                    return { ...product, quantity: product.quantity - 1 };
+                })
+                .filter(Boolean)
         );
     };
 
